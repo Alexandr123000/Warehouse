@@ -24,12 +24,12 @@ namespace Warehouse
                 command.CommandText = "INSERT INTO sells (amount, txt) VALUES ('" + Convert.ToString(i) + "', 'LLL');";
                 command.ExecuteNonQuery();
             }
-            command.CommandText = @"SELECT * FROM sells";
+            /*command.CommandText = @"SELECT * FROM sells";
             var reader = command.ExecuteReader();
             while (reader.Read())
             {
                 MessageBox.Show(Convert.ToString(reader.GetInt64(0)) + Convert.ToString(reader.GetInt64(1)) + reader.GetString(2));
-            }
+            }*/
             connection.Close();
         }
     }

@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
 using System.IO;
+using Base.ViewModels;
 
 namespace Warehouse
 {
@@ -18,6 +19,7 @@ namespace Warehouse
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
         }
     }
 }
