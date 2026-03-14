@@ -16,10 +16,14 @@ namespace Warehouse
 {
     public partial class MainWindow : Window
     {
+        public static DatabaseWork MainDatabase = new DatabaseWork();
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            MainDatabase.TempDataInsertion();
+            MainDatabase.AllDataExtraction();
+            databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
     }
 }
