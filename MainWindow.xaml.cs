@@ -24,6 +24,31 @@ namespace Warehouse
             MainDatabase.TempDataInsertion();
             MainDatabase.AllDataExtraction();
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
+            AddProductButton.Click += AddProductButton_Click;
+            SellProductButton.Click += SellProductButton_Click;
+            ShowProductOfCertainTypeButton.Click += ShowProductOfCertainTypeButton_Click;
+            ShowSoldProductsButton.Click += ShowSoldProductsButton_Click;
+            DeleteAllProductsButton.Click += DeleteAllProductsButton_Click;
+        }
+        private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ShowSoldProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ShowProductOfCertainTypeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void SellProductButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

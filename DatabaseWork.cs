@@ -39,7 +39,7 @@ namespace Warehouse
         public void TempDataInsertion()
         {
             connection.Open();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 command.CommandText = "INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('nnn', 'vvv', '123.5', '100.5', '100', '247');";
                 command.ExecuteNonQuery();

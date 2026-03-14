@@ -7,9 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize">
     <Grid>
-        <DataGrid Name="databaseMainGrid">
-            
-        </DataGrid>
+        <Label Content="Product Types" Height="30" FontSize="16" Margin="10,109,1045,545"/>
+        <Label Content="Products" Height="30" FontSize="16" Margin="160,109,895,545"/>
+
+        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="1003,10,105,649"/>
+        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Margin="1165,10,10,649" Width="25"/>
+
+        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="1003,35,57,624"/>
+        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1165,35,10,624" Width="25"/>
+
+        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="1003,60,33,599" Height="25"/>
+        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1165,60,10,599" Width="25"/>
+
+        <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="10,10,1045,644"/>
+        <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="160,10,895,644" Width="145"/>
+
+        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="702,10,311,644"/>
+        <Button Name="ShowProductOfCertainTypeButton" Content="ShowProductOfCertainType" Height="30" Margin="310,10,684,644"/>
+
+        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="521,10,503,644"/>
+
+        <DataGrid Name="databaseMainGrid" Margin="160,144,10,10"/>
+        <DataGrid Name="productTypesGrid" Margin="10,144,1045,10"/>
+
         <!--<TextBox Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="200" Height="50"/>
         <TextBlock Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200" Margin="311,282,311,104" Height="50"/>-->
     </Grid>
