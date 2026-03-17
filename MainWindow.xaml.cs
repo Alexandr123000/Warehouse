@@ -32,7 +32,9 @@ namespace Warehouse
         }
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Deletion DeleteAllProducts = new Deletion();
+            DeleteAllProducts.Show();
+            MainDatabase.AllProductsDeletion();
         }
         private void ShowSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {

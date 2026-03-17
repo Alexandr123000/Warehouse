@@ -6,29 +6,29 @@
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize">
-    <Grid Height="670" Width="1180" Margin="10,10,10,10">
-        <Label Content="Product Types" FontSize="16" Margin="10,177,980,475"/>
-        <Label Content="Products" FontSize="16" Margin="225,177,830,475"/>
+    <Grid Height="663" Width="1180" Margin="10,10,10,10">
+        <Label Content="Product Types" FontSize="16" Margin="0,182,1064,443"/>
+        <Label Content="Products" FontSize="16" Margin="236,182,865,444"/>
 
-        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="1003,10,105,649"/>
-        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Margin="1165,10,10,649" Width="25"/>
+        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="1062,-2,25,640"/>
+        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Margin="1155,0,0,638" Width="25"/>
 
-        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="955,10,105,629"/>
-        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1165,35,10,624" Width="25"/>
+        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="1012,23,25,615"/>
+        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1155,25,0,613" Width="25"/>
 
-        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="1003,60,33,599" Height="25"/>
-        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1165,60,10,599" Width="25"/>
+        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="988,48,25,590" Height="25"/>
+        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1155,50,0,588" Width="25"/>
 
-        <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="0,0,1107,634"/>
-        <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="78,0,1028,634"/>
+        <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="0,0,1107,633"/>
+        <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="78,0,1028,633"/>
 
-        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="455,0,600,634"/>
-        <Button Name="ShowProductOfCertainTypeButton" Content="ShowProductOfCertainType" Height="30" Margin="157,0,865,634"/>
+        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="455,0,600,633"/>
+        <Button Name="ShowProductOfCertainTypeButton" Content="ShowProductOfCertainType" Height="30" Margin="157,0,865,633"/>
 
-        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="320,0,730,634"/>
+        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="320,0,730,633"/>
 
-        <DataGrid Name="databaseMainGrid" Margin="236,219,0,0"/>
-        <DataGrid Name="productTypesGrid" Margin="0,219,990,0"/>
+        <DataGrid Name="databaseMainGrid" Margin="236,219,0,1"/>
+        <DataGrid Name="productTypesGrid" Margin="0,219,949,1"/>
 
         <!--<TextBox Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="200" Height="50"/>
         <TextBlock Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200" Margin="311,282,311,104" Height="50"/>-->

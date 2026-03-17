@@ -57,5 +57,13 @@ namespace Warehouse
             }
             connection.Close();
         }
+        public void AllProductsDeletion()
+        {
+            connection.Open();
+            command.CommandText = @"DELETE FROM Wares";
+            command.ExecuteNonQuery();
+            Data.Clear();
+            connection.Close();
+        }
     }
 }
