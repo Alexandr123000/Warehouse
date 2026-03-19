@@ -17,9 +17,11 @@ namespace Warehouse
     public partial class MainWindow : Window
     {
         public static DatabaseWork MainDatabase = new DatabaseWork();
+
         public MainWindow()
         {
             InitializeComponent();
+            NewProductAddition NewProduct = new NewProductAddition(this);
             this.DataContext = new MainWindowViewModel();
             MainDatabase.TempDataInsertion();
             MainDatabase.AllDataExtraction();
@@ -50,8 +52,12 @@ namespace Warehouse
         }
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            NewProductAddition NewProduct = new NewProductAddition();
+            NewProductAddition NewProduct = new NewProductAddition(this);
             NewProduct.Show();
         }
+        //static void DatabaseMainGridDeletion()
+        //{
+        //    databaseMainGrid.Items.Clear();
+        //}
     }
 }

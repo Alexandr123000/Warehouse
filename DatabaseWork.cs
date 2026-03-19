@@ -19,8 +19,8 @@ namespace Warehouse
         {
             connection.Open();
             command.Connection = connection;
-            command.CommandText = @"CREATE TABLE Wares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, PurchasePrice REAL, Amount INTEGER, TotalPrice REAL);";
-            command.ExecuteNonQuery();
+            //command.CommandText = @"CREATE TABLE Wares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, PurchasePrice REAL, Amount INTEGER, TotalPrice REAL);";
+            //command.ExecuteNonQuery();
             connection.Close();
         }
         public void NewDatabaseTable(string Name)
@@ -35,7 +35,6 @@ namespace Warehouse
             connection.Open();
                 command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
                 command.ExecuteNonQuery();
-            MessageBox.Show("lll");
             connection.Close();
         }
         public void TempDataInsertion()
@@ -50,6 +49,7 @@ namespace Warehouse
         }
         public void AllDataExtraction()
         {
+            MessageBox.Show("Bef: " + Data.Count.ToString());
             connection.Open();
             command.CommandText = @"SELECT * FROM Wares";
             var reader = command.ExecuteReader();
@@ -57,6 +57,7 @@ namespace Warehouse
             {
                 Data.Add(new MainTable(Convert.ToInt32(reader.GetInt64(0)), reader.GetString(1), reader.GetString(2), reader.GetDouble(3), reader.GetDouble(4), Convert.ToInt32(reader.GetInt64(5)), reader.GetDouble(6)));
             }
+            MessageBox.Show("Aft: " + Data.Count.ToString());
             connection.Close();
         }
         public void AllProductsDeletion()
