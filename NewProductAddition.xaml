@@ -5,10 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="NewProductAddition" Height="450" Width="800">
+        Title="NewProductAddition" Height="470" Width="500">
     <Grid>
-        <Label Content="Product name" Margin="10,0,675,407"/>
-        <TextBox Name="nameOfNewProduct" Margin="10,27,607,384">ggg</TextBox>
-        <Label Content="Product name" Margin="10,55,675,352"/>
+
+        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="274,6,100,403"/>
+        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,4,2,405"/>
+
+        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="274,31,50,378"/>
+        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,31,2,378"/>
+
+        <Label Content="Total Number Of Sold Products:" FontSize="11" Height="25" Margin="274,56,28,353"/>
+        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,57,2,352"/>
+
+
+
+        <Label Content="Product Name" Margin="4,4,292,403"/>
+        <TextBox Name="NameOfNewProductTextBox" Margin="4,31,292,382"/>
+        <Label Content="Product Type" Margin="4,57,292,350"/>
+        <TextBox Name="TypeOfNewProductTextBox" Margin="4,84,292,329"/>
+        <Label Content="Product Price" Margin="4,110,292,297"/>
+        <TextBox Name="PriceOfNewProductTextBox" Margin="4,137,292,276"/>
+        <Label Content="Product Purchase Price" Margin="4,163,292,244"/>
+        <TextBox Name="PurchasePriceOfNewProductTextBox" Margin="4,190,292,223"/>
+        <Label Content="Product Amount" Margin="4,216,292,191"/>
+        <TextBox Name="AmountOfNewProductTextBox" Margin="4,243,292,170"/>
+        <Label Content="Product Total Price" Margin="4,269,292,138"/>
+        <TextBox Name="TotalPriceOfNewProductTextBox" Margin="4,296,292,117"/>
+
+        <Label Content="Balance:" FontSize="11" Height="25" Margin="4,322,413,87"/>
+        <Label Name="BalanceLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="62,322,393,87"/>
+
+
+        <Button Name="NewProductAdditionButton" Content="Add New Product" Margin="10,395,328,10"/>
+        <Button Name="CancelNewProductAdditionButton" Content="Cancel" Margin="401,395,10,10"/>
     </Grid>
 </Window>

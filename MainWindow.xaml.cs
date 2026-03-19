@@ -50,7 +50,8 @@ namespace Warehouse
         }
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NewProductAddition NewProduct = new NewProductAddition();
+            NewProduct.Show();
         }
     }
 }

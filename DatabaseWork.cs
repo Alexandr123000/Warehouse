@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace Warehouse
 {
@@ -29,11 +30,12 @@ namespace Warehouse
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public void DataInsertion(int Id, string Name, string Type, double Price, double PurchasePrice, int Amount, double TotalPrice)
+        public void DataInsertion(string Name, string Type, double Price, double PurchasePrice, int Amount, double TotalPrice)
         {
             connection.Open();
                 command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
                 command.ExecuteNonQuery();
+            MessageBox.Show("lll");
             connection.Close();
         }
         public void TempDataInsertion()
