@@ -29,21 +29,12 @@ namespace Warehouse
         private void NewProductAdditionButton_Click(object sender, RoutedEventArgs e)
         {
             double TempTotalPrice = Convert.ToDouble(PriceOfNewProductTextBox.Text) * Convert.ToInt32(AmountOfNewProductTextBox.Text);
-            //int LastId, CurrentId;
-            //LastId = DatabaseWork.Data[DatabaseWork.Data.Count - 1].ID;
-            //CurrentId = LastId += 2;
-            //DatabaseWork.Data.Add(new MainTable(CurrentId, NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice));
-            MainWidowObject.databaseMainGrid.ItemsSource = null;
-            MainWidowObject.databaseMainGrid.Items.Clear();
             DatabaseWork.Data.Clear();
-            MessageBox.Show("jjj");
-            MainWindow.MainDatabase.DataInsertion(NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
-            MessageBox.Show("jjj");
-
-            MainWidowObject.databaseMainGrid.ItemsSource = DatabaseWork.Data;
-            //MainWidowObject.databaseMainGrid.Items.Clear();
+            MainWidowObject.databaseMainGrid.ItemsSource = null;
             //DatabaseWork.Data.Clear();
+            MainWindow.MainDatabase.DataInsertion(NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
             MainWindow.MainDatabase.AllDataExtraction();
+            MainWidowObject.databaseMainGrid.ItemsSource = DatabaseWork.Data;
             this.Close();
         }
     }

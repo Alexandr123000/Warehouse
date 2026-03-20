@@ -1,3 +1,10 @@
 <Solution>
-  <Project Path="Warehouse.csproj" />
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Warehouse.csproj">
+    <Platform Solution="*|x86" Project="x86" />
+    <Build Solution="*|x86" Project="false" />
+  </Project>
 </Solution>

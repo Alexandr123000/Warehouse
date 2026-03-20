@@ -10,6 +10,7 @@ namespace Warehouse
     public class DatabaseWork
     {
         static internal List<MainTable> Data = new List<MainTable>();
+        
         public static string currentDirectory = Directory.GetCurrentDirectory();
         public static string changedDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, @"../../../"));
         public static string databaseFile = @"Data Source=" + changedDirectory + "Database.db";
@@ -19,8 +20,9 @@ namespace Warehouse
         {
             connection.Open();
             command.Connection = connection;
-            //command.CommandText = @"CREATE TABLE Wares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, PurchasePrice REAL, Amount INTEGER, TotalPrice REAL);";
-            //command.ExecuteNonQuery();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS Wares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, PurchasePrice REAL, Amount INTEGER, TotalPrice REAL);";
+            command.ExecuteNonQuery();
+            Data.Add(new MainTable(1, "TempData", "TempData", 100, 90, 10, 1000));
             connection.Close();
         }
         public void NewDatabaseTable(string Name)
@@ -40,9 +42,9 @@ namespace Warehouse
         public void TempDataInsertion()
         {
             connection.Open();
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i < 6; i++)
             {
-                command.CommandText = "INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('nnn', 'vvv', '123.5', '100.5', '100', '247');";
+                command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('TempData', 'TempData', '{i.ToString()}', '{(i - 1).ToString()}', '10', '{(i * 10).ToString()}');";
                 command.ExecuteNonQuery();
             }
             connection.Close();

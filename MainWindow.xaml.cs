@@ -23,9 +23,10 @@ namespace Warehouse
             InitializeComponent();
             NewProductAddition NewProduct = new NewProductAddition(this);
             this.DataContext = new MainWindowViewModel();
-            MainDatabase.TempDataInsertion();
+            //MainDatabase.TempDataInsertion();
             MainDatabase.AllDataExtraction();
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
+
             AddProductButton.Click += AddProductButton_Click;
             SellProductButton.Click += SellProductButton_Click;
             ShowProductOfCertainTypeButton.Click += ShowProductOfCertainTypeButton_Click;
