@@ -12,14 +12,16 @@ using System.Windows.Shapes;
 
 namespace Warehouse
 {
-    /// <summary>
-    /// Логика взаимодействия для Deletion.xaml
-    /// </summary>
     public partial class Deletion : Window
     {
         public Deletion()
         {
             InitializeComponent();
+            CloseDeletionResultWindowButton.Click += CloseDeletionResultWindowButton_Click;
+        }
+        private void CloseDeletionResultWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

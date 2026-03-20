@@ -29,9 +29,8 @@ namespace Warehouse
         private void NewProductAdditionButton_Click(object sender, RoutedEventArgs e)
         {
             double TempTotalPrice = Convert.ToDouble(PriceOfNewProductTextBox.Text) * Convert.ToInt32(AmountOfNewProductTextBox.Text);
-            DatabaseWork.Data.Clear();
             MainWidowObject.databaseMainGrid.ItemsSource = null;
-            //DatabaseWork.Data.Clear();
+            DatabaseWork.Data.Clear();
             MainWindow.MainDatabase.DataInsertion(NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
             MainWindow.MainDatabase.AllDataExtraction();
             MainWidowObject.databaseMainGrid.ItemsSource = DatabaseWork.Data;

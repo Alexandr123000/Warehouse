@@ -22,7 +22,6 @@ namespace Warehouse
             command.Connection = connection;
             command.CommandText = @"CREATE TABLE IF NOT EXISTS Wares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, PurchasePrice REAL, Amount INTEGER, TotalPrice REAL);";
             command.ExecuteNonQuery();
-            Data.Add(new MainTable(1, "TempData", "TempData", 100, 90, 10, 1000));
             connection.Close();
         }
         public void NewDatabaseTable(string Name)
@@ -32,35 +31,46 @@ namespace Warehouse
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public void DataInsertion(string Name, string Type, double Price, double PurchasePrice, int Amount, double TotalPrice)
+        public void DataInsertion(string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0)
         {
-            connection.Open();
-                command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
-                command.ExecuteNonQuery();
-            connection.Close();
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            Command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
+            Command.ExecuteNonQuery();
+            TempConnection.Close();
         }
         public void TempDataInsertion()
         {
             connection.Open();
-            for (int i = 1; i < 6; i++)
+            /*for (int i = 1; i < 6; i++)
             {
-                command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('TempData', 'TempData', '{i.ToString()}', '{(i - 1).ToString()}', '10', '{(i * 10).ToString()}');";
-                command.ExecuteNonQuery();
-            }
+            command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('TempData', 'TempData', '{i.ToString()}', '{(i - 1).ToString()}', '10', '{(i * 10).ToString()}');";
+            */command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('TempData', 'TempData', '76', '70', '10', '760');";
+            command.ExecuteNonQuery();
+            //}
             connection.Close();
         }
         public void AllDataExtraction()
         {
-            MessageBox.Show("Bef: " + Data.Count.ToString());
-            connection.Open();
-            command.CommandText = @"SELECT * FROM Wares";
-            var reader = command.ExecuteReader();
+            //MessageBox.Show("Bef: " + Data.Count.ToString());
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM Wares";
+            var reader = Command.ExecuteReader();
             while (reader.Read())
             {
                 Data.Add(new MainTable(Convert.ToInt32(reader.GetInt64(0)), reader.GetString(1), reader.GetString(2), reader.GetDouble(3), reader.GetDouble(4), Convert.ToInt32(reader.GetInt64(5)), reader.GetDouble(6)));
             }
-            MessageBox.Show("Aft: " + Data.Count.ToString());
-            connection.Close();
+            //MessageBox.Show("Aft: " + Data.Count.ToString());
+            TempConnection.Close();
         }
         public void AllProductsDeletion()
         {
