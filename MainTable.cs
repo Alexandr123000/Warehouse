@@ -23,6 +23,6 @@ namespace Warehouse
         public double PurchasePrice { get; set; }
         public int Amount { get; set; }
         public double TotalPrice { get; set; }
-        
+
     }
 }

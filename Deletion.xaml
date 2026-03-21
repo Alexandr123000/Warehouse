@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="Deletion" Height="200" Width="300" Name="DeleteAllProductsWindow" ResizeMode="NoResize">
+        Title="Deletion" Height="200" Width="300" Name="DeleteAllProductsWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,0">
         <Label Content="All products have been removed" FontSize="15" Padding="0" Width="218" Margin="31,66,31,58"/>
         <Button Name="CloseDeletionResultWindowButton" Content="Close" FontSize="12" Margin="218,154,10,10"/>

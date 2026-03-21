@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize">
+        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Height="663" Width="1180" Margin="10,10,10,10">
         <Label Content="Product Types" FontSize="16" Margin="0,182,1064,443"/>
         <Label Content="Products" FontSize="16" Margin="236,182,865,444"/>
