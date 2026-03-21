@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Xml.Linq;
 
 namespace Warehouse
 {
@@ -36,18 +37,18 @@ namespace Warehouse
         }
         public void TypeDataInsertion(string Name = "")
         {
-                //--------------
-                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                SQLiteCommand Command = new SQLiteCommand();
-                Command.Connection = TempConnection;
-                //--------------
-                TempConnection.Open();
-                Command.CommandText = $"INSERT INTO WareTypes (Name) VALUES ('{Name}');";
-                Command.ExecuteNonQuery();
-                AllTypeDataExtraction();
-                ChangeGrid.productTypesGrid.ItemsSource = null;
-                ChangeGrid.productTypesGrid.ItemsSource = TypeData;
-                TempConnection.Close();
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            Command.CommandText = $"INSERT INTO WareTypes (Name) VALUES ('{Name}');";
+            Command.ExecuteNonQuery();
+            AllTypeDataExtraction();
+            ChangeGrid.productTypesGrid.ItemsSource = null;
+            ChangeGrid.productTypesGrid.ItemsSource = TypeData;
+            TempConnection.Close();
         }
         public void DataInsertion(string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0)
         {
@@ -102,11 +103,45 @@ namespace Warehouse
             connection.Open();
             command.CommandText = @"DELETE FROM Wares";
             command.ExecuteNonQuery();
+            command.CommandText = @"DELETE FROM WareTypes";
+            command.ExecuteNonQuery();
             Data.Clear();
             TypeData.Clear();
             ChangeGrid.databaseMainGrid.ItemsSource = null;
             ChangeGrid.productTypesGrid.ItemsSource = null;
+            ChangeGrid.databaseMainGrid.ItemsSource = Data;
+            ChangeGrid.productTypesGrid.ItemsSource = TypeData;
             connection.Close();
         }
+
+        public void ProductDeletion(ProductsSelling productsSelling) //===============================================================
+        {
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            if (Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) == 1)
+            {
+                Command.CommandText = @$"DELETE FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}';";
+                Command.ExecuteNonQuery();
+                /*ChangeGrid.databaseMainGrid.ItemsSource = null;
+                AllDataExtraction();
+                ChangeGrid.databaseMainGrid.ItemsSource = Data;*/
+            
+            }
+            else
+            {
+                Command.CommandText = @$"UPDATE Wares SET Amount = (SELECT Amount FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}');";
+                Command.ExecuteNonQuery();
+                MessageBox.Show("JJJ");
+            }
+            /*Command.CommandText = $"INSERT INTO SoldWares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES (SELECT Name, Type, Price, PurchasePrice, Amount, TotalPrice FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}');";
+            Command.ExecuteNonQuery();*/
+            TempConnection.Close();
+            
+        }
+
     }
 }

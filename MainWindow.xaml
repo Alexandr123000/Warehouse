@@ -27,8 +27,8 @@
 
         <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="320,0,730,633"/>
 
-        <DataGrid Name="databaseMainGrid" Margin="236,219,0,1"/>
-        <DataGrid Name="productTypesGrid" Margin="0,219,949,1"/>
+        <DataGrid Name="databaseMainGrid" ColumnWidth="132" Margin="236,219,0,1"/>
+        <DataGrid Name="productTypesGrid" ColumnWidth="113" Margin="0,219,949,1"/>
 
         <!--<TextBox Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="200" Height="50"/>
         <TextBlock Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200" Margin="311,282,311,104" Height="50"/>-->
