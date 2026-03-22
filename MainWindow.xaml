@@ -22,10 +22,10 @@
         <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="0,0,1107,633"/>
         <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="78,0,1028,633"/>
 
-        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="455,0,600,633"/>
-        <Button Name="ShowProductOfCertainTypeButton" Content="ShowProductOfCertainType" Height="30" Margin="157,0,865,633"/>
+        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="478,0,577,633"/>
+        <Button Name="ShowProductOfCertainTypeButton" Content="Show Product Of Certain Type" Height="30" Margin="157,0,842,633"/>
 
-        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="320,0,730,633"/>
+        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="343,0,707,633"/>
 
         <DataGrid Name="databaseMainGrid" ColumnWidth="132" Margin="236,219,0,1"/>
         <DataGrid Name="productTypesGrid" ColumnWidth="113" Margin="0,219,949,1"/>

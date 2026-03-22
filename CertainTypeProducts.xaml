@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="CertainTypeProducts" Height="450" Width="800">
-    <Grid>
-        
+        Title="CertainTypeProducts" Height="600" Width="700">
+    <Grid Margin="10, 10, 10, 10">
+        <Label Content="Sold Products" Padding="0" Margin="0,0,523,445"/>
+        <DataGrid Name="SoldProductsGrid" ColumnWidth="105.5" Margin="0,19,0,43"/>
+        <Button Name="CloseSoldProductsButton" Content="Close" Margin="544,439,0,0"/>
     </Grid>
 </Window>

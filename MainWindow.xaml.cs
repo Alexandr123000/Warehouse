@@ -17,6 +17,7 @@ namespace Warehouse
     public partial class MainWindow : Window
     {
         public static DatabaseWork MainDatabase = new DatabaseWork();
+        //public static InformationWindow DatabaseInformationWindow = new InformationWindow();
 
         public MainWindow()
         {
@@ -41,9 +42,9 @@ namespace Warehouse
         }
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
         {
-            Deletion DeleteAllProducts = new Deletion();
-            DeleteAllProducts.Show();
             MainDatabase.AllProductsDeletion();
+            /*DatabaseInformationWindow.InformationLabel.Content = "All products have been removed";
+            DatabaseInformationWindow.Show();*/
         }
         private void ShowSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {
