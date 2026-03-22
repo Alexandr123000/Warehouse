@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace Warehouse
 {
-    /// <summary>
-    /// Логика взаимодействия для SoldProducts.xaml
-    /// </summary>
     public partial class SoldProducts : Window
     {
         MainWindow TempObject;
@@ -29,7 +26,6 @@ namespace Warehouse
             SoldProductsObject.SoldProductsDataExtraction();
             SoldProductsGrid.ItemsSource = DatabaseWork.SoldProductsData;
         }
-
         private void CloseSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

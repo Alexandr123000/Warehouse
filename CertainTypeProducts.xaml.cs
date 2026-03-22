@@ -12,14 +12,25 @@ using System.Windows.Shapes;
 
 namespace Warehouse
 {
-    /// <summary>
-    /// Логика взаимодействия для CertainTypeProducts.xaml
-    /// </summary>
     public partial class CertainTypeProducts : Window
     {
         public CertainTypeProducts()
         {
             InitializeComponent();
+            MainWindow.MainDatabase.SetCertaingTypeProductsObject(this);
+            ShowCertainTypeProductsButton.Click += ShowCertainTypeProductsButton_Click;
+            CloseCertainTypeProductsButton.Click += CloseCertainTypeProductsButton_Click;
+        }
+        private void ShowCertainTypeProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+            DatabaseWork.CertainTypeProductsData.Clear();
+            MainWindow.MainDatabase.CertainTypeProductsDataExtraction();
+            CertainTypeProductsGrid.ItemsSource = null;
+            CertainTypeProductsGrid.ItemsSource = DatabaseWork.CertainTypeProductsData;
+        }
+        private void CloseCertainTypeProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

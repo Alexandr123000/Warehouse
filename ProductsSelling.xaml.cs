@@ -22,12 +22,10 @@ namespace Warehouse
             ProductSellingButton.Click += ProductSellingButton_Click;
             CancelProductSellingButton.Click += CancelProductSellingButton_Click;
         }
-
         private void CancelProductSellingButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
         private void ProductSellingButton_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWork TempDataObject = new DatabaseWork();

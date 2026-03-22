@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace Warehouse
 {
-    /// <summary>
-    /// Логика взаимодействия для InformationWindow.xaml
-    /// </summary>
     public partial class InformationWindow : Window
     {
         public InformationWindow()
@@ -26,6 +23,5 @@ namespace Warehouse
         {
             this.Close();
         }
-    
     }
 }

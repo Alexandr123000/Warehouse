@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
 using System.Xml.Linq;
@@ -13,9 +14,10 @@ namespace Warehouse
         static internal List<MainTable> Data = new List<MainTable>();
         static internal List<TypeTable> TypeData = new List<TypeTable>();
         static internal List<SoldProductsTable> SoldProductsData = new List<SoldProductsTable>();
+        static internal List<MainTable> CertainTypeProductsData = new List<MainTable>();
         MainWindow ChangeGrid;
         static SoldProducts AllSoldProducts;
-
+        CertainTypeProducts CertainTypeProductsObject;
         public static string currentDirectory = Directory.GetCurrentDirectory();
         public static string changedDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, @"../../../"));
         public static string databaseFile = @"Data Source=" + changedDirectory + "Database.db";
@@ -33,15 +35,19 @@ namespace Warehouse
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public void SetObject(MainWindow changeGrid) //+++
+        public void SetObject(MainWindow changeGrid) //+++ =================================================================
         {
             ChangeGrid = changeGrid;
         }
-        public void SetAllSoldProductsObject(SoldProducts SoldProducts) //+++
+        public void SetAllSoldProductsObject(SoldProducts SoldProducts) //+++ =================================================================
         {
             AllSoldProducts = SoldProducts;
         }
-        public void TypeDataInsertion(string Name = "") //+++
+        public void SetCertaingTypeProductsObject(CertainTypeProducts CertainTypeProductsObject) //+++ =================================================================
+        {
+            this.CertainTypeProductsObject = CertainTypeProductsObject;
+        }
+        public void TypeDataInsertion(string Name = "") //+++ =================================================================
         {
             //--------------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
@@ -59,40 +65,47 @@ namespace Warehouse
             DatabaseInformationWindow.InformationLabel.Content = "Product added";
             DatabaseInformationWindow.Show();
         }
-        public void DataInsertion(NewProductAddition TempObject, string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0)
+        public void DataInsertion(NewProductAddition TempObject, string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0) // =================================================================
         {
-            try
+            if (Amount == 0 || Amount < 0)
             {
-                if (Amount == 0 || Amount < 0)
-                {
-                    InformationWindow DatabaseInformationWindow = new InformationWindow();
-                    DatabaseInformationWindow.InformationLabel.Content = "The number is incorrect";
-                    DatabaseInformationWindow.Show();
-                }
-                else
-                {
-                    TypeData.Clear();
-                    TypeDataInsertion(Type);
-                    //--------------
-                    SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                    SQLiteCommand Command = new SQLiteCommand();
-                    Command.Connection = TempConnection;
-                    //--------------
-                    TempConnection.Open();
-                    Command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
-                    Command.ExecuteNonQuery();
-                    /*Command.CommandText = @$"UPDATE Wares SET Amount = (SELECT Amount FROM Wares WHERE Name = '{TempObject.NameOfNewProductTextBox.Text}' AND Type = '{TempObject.TypeOfNewProductTextBox.Text}') + {TempObject.AmountOfNewProductTextBox.Text} WHERE Name = '{TempObject.NameOfNewProductTextBox.Text}' AND Type = '{TempObject.TypeOfNewProductTextBox.Text}';";
-                    Command.ExecuteNonQuery();*/
-                    TempConnection.Close();
-                }
+                InformationWindow DatabaseInformationWindow = new InformationWindow();
+                DatabaseInformationWindow.InformationLabel.Content = "The number is incorrect";
+                DatabaseInformationWindow.Show();
             }
-            catch ( Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message );
+                TypeData.Clear();
+                TypeDataInsertion(Type);
+                //--------------
+                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+                SQLiteCommand Command = new SQLiteCommand();
+                Command.Connection = TempConnection;
+                //--------------
+                TempConnection.Open();
+                Command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
+                Command.ExecuteNonQuery();
+                TempConnection.Close();
             }
         }
-
-        public void AllDataExtraction() //+++
+        public void CertainTypeProductsDataExtraction() //+++ =================================================================
+        {
+            CertainTypeProductsData.Clear();
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @$"SELECT * FROM Wares WHERE Type = '{CertainTypeProductsObject.ProductTypeTextBox.Text}';";
+            var CertainTypeProductsReader = Command.ExecuteReader();
+            while (CertainTypeProductsReader.Read())
+            {
+                CertainTypeProductsData.Add(new MainTable(Convert.ToInt32(CertainTypeProductsReader.GetInt64(0)), CertainTypeProductsReader.GetString(1), CertainTypeProductsReader.GetString(2), CertainTypeProductsReader.GetDouble(3), CertainTypeProductsReader.GetDouble(4), Convert.ToInt32(CertainTypeProductsReader.GetInt64(5)), CertainTypeProductsReader.GetDouble(6)));
+            }
+            TempConnection.Close();
+        }
+        public void AllDataExtraction() //+++ =================================================================
         {
             Data.Clear();
             //-----------
@@ -109,33 +122,24 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-
-        public void SoldProductsDataExtraction() //+++
+        public void SoldProductsDataExtraction() //+++ =================================================================
         {
-            try
+            SoldProductsData.Clear();
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM SoldWares";
+            var SoldProductsReader = Command.ExecuteReader();
+            while (SoldProductsReader.Read())
             {
-                SoldProductsData.Clear();
-                //-----------
-                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                SQLiteCommand Command = new SQLiteCommand();
-                Command.Connection = TempConnection;
-                //-----------
-                TempConnection.Open();
-                Command.CommandText = @"SELECT * FROM SoldWares";
-                var SoldProductsReader = Command.ExecuteReader();
-                while (SoldProductsReader.Read())
-                {
-                    SoldProductsData.Add(new SoldProductsTable(Convert.ToInt32(SoldProductsReader.GetInt64(0)), SoldProductsReader.GetString(1), SoldProductsReader.GetString(2), SoldProductsReader.GetDouble(3), Convert.ToInt32(SoldProductsReader.GetInt64(4)), SoldProductsReader.GetDouble(5)));
-                }
-                TempConnection.Close();
+                SoldProductsData.Add(new SoldProductsTable(Convert.ToInt32(SoldProductsReader.GetInt64(0)), SoldProductsReader.GetString(1), SoldProductsReader.GetString(2), SoldProductsReader.GetDouble(3), Convert.ToInt32(SoldProductsReader.GetInt64(4)), SoldProductsReader.GetDouble(5)));
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-}
-
-        public void AllTypeDataExtraction() //+++
+            TempConnection.Close();
+        }
+        public void AllTypeDataExtraction() //+++ =================================================================
         {
             //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
@@ -153,71 +157,54 @@ namespace Warehouse
         }
         public void AllProductsDeletion() //+++
         {
-            try
+            connection.Open();
+            command.CommandText = @"DELETE FROM Wares";
+            command.ExecuteNonQuery();
+            command.CommandText = @"DELETE FROM WareTypes";
+            command.ExecuteNonQuery();
+            Data.Clear();
+            TypeData.Clear();
+            ChangeGrid.databaseMainGrid.ItemsSource = null;
+            ChangeGrid.productTypesGrid.ItemsSource = null;
+            ChangeGrid.databaseMainGrid.ItemsSource = Data;
+            ChangeGrid.productTypesGrid.ItemsSource = TypeData;
+            connection.Close();
+        }
+        public void ProductDeletion(ProductsSelling productsSelling, MainWindow TempObject) //+++ =================================================================
+        {
+            if (Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) == 0 || Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) < 0)
             {
-                connection.Open();
-                command.CommandText = @"DELETE FROM Wares";
-                command.ExecuteNonQuery();
-                command.CommandText = @"DELETE FROM WareTypes";
-                command.ExecuteNonQuery();
-                Data.Clear();
-                TypeData.Clear();
-                ChangeGrid.databaseMainGrid.ItemsSource = null;
-                ChangeGrid.productTypesGrid.ItemsSource = null;
-                ChangeGrid.databaseMainGrid.ItemsSource = Data;
-                ChangeGrid.productTypesGrid.ItemsSource = TypeData;
-                connection.Close();
+                InformationWindow DatabaseInformationWindow = new InformationWindow();
+                DatabaseInformationWindow.InformationLabel.Content = "The number is incorrect";
+                DatabaseInformationWindow.Show();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                double TotalPrice;
+                //--------------
+                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+                SQLiteCommand Command = new SQLiteCommand();
+                TotalPrice = Convert.ToDouble(productsSelling.PriceSellingProductTextBox.Text) * Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text);
+                Command.Connection = TempConnection;
+                //--------------
+                TempConnection.Open();
+                Command.CommandText = @$"UPDATE Wares SET Amount = (SELECT Amount FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}') - {productsSelling.ProductQuantityTextBox.Text} WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}';";
+                Command.ExecuteNonQuery();
+                Command.CommandText = @"DELETE FROM Wares WHERE Amount < 1;";
+                Command.ExecuteNonQuery();
+                Command.CommandText = $"INSERT INTO SoldWares (Name, Type, Price, Amount, TotalPrice) VALUES ('{productsSelling.NameOfSellingProductTextBox.Text}', '{productsSelling.TypeOfSellingProductTextBox.Text}', '{productsSelling.PriceSellingProductTextBox.Text}', '{productsSelling.ProductQuantityTextBox.Text}', '{TotalPrice}');";
+                Command.ExecuteNonQuery();
+                TempConnection.Close();
+                AllDataExtraction();
+                SoldProductsDataExtraction();
+                TempObject.databaseMainGrid.ItemsSource = null;
+                AllSoldProducts.SoldProductsGrid.ItemsSource = null;
+                TempObject.databaseMainGrid.ItemsSource = Data;
+                AllSoldProducts.SoldProductsGrid.ItemsSource = SoldProductsData;
+                InformationWindow DatabaseInformationWindow = new InformationWindow();
+                DatabaseInformationWindow.InformationLabel.Content = "Product sold";
+                DatabaseInformationWindow.Show();
             }
         }
-
-        public void ProductDeletion(ProductsSelling productsSelling, MainWindow TempObject) //+++
-        {
-            try
-            {
-                if (Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) == 0 || Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) < 0)
-                {
-                    InformationWindow DatabaseInformationWindow = new InformationWindow();
-                    DatabaseInformationWindow.InformationLabel.Content = "The number is incorrect";
-                    DatabaseInformationWindow.Show();
-                }
-                else
-                {
-                    double TotalPrice;
-                    //--------------
-                    SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                    SQLiteCommand Command = new SQLiteCommand();
-                    TotalPrice = Convert.ToDouble(productsSelling.PriceSellingProductTextBox.Text) * Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text);
-
-                    Command.Connection = TempConnection;
-                    //--------------
-                    TempConnection.Open();
-                    Command.CommandText = @$"UPDATE Wares SET Amount = (SELECT Amount FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}') - {productsSelling.ProductQuantityTextBox.Text} WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}';";
-                    Command.ExecuteNonQuery();
-                    Command.CommandText = @"DELETE FROM Wares WHERE Amount < 1;";
-                    Command.ExecuteNonQuery();
-                    Command.CommandText = $"INSERT INTO SoldWares (Name, Type, Price, Amount, TotalPrice) VALUES ('{productsSelling.NameOfSellingProductTextBox.Text}', '{productsSelling.TypeOfSellingProductTextBox.Text}', '{productsSelling.PriceSellingProductTextBox.Text}', '{productsSelling.ProductQuantityTextBox.Text}', '{TotalPrice}');";
-                    Command.ExecuteNonQuery();
-                    TempConnection.Close();
-                    AllDataExtraction();
-                    SoldProductsDataExtraction();
-
-                    TempObject.databaseMainGrid.ItemsSource = null;
-                    AllSoldProducts.SoldProductsGrid.ItemsSource = null;
-                    TempObject.databaseMainGrid.ItemsSource = Data;
-                    AllSoldProducts.SoldProductsGrid.ItemsSource = SoldProductsData;
-                    InformationWindow DatabaseInformationWindow = new InformationWindow();
-                    DatabaseInformationWindow.InformationLabel.Content = "Product sold";
-                    DatabaseInformationWindow.Show();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-}
     }
 }

@@ -17,8 +17,6 @@ namespace Warehouse
     public partial class MainWindow : Window
     {
         public static DatabaseWork MainDatabase = new DatabaseWork();
-        //public static InformationWindow DatabaseInformationWindow = new InformationWindow();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -29,11 +27,8 @@ namespace Warehouse
             MainDatabase.SetObject(this);
             MainDatabase.AllDataExtraction();
             MainDatabase.AllTypeDataExtraction();
-
-
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
             productTypesGrid.ItemsSource = DatabaseWork.TypeData;
-
             AddProductButton.Click += AddProductButton_Click;
             SellProductButton.Click += SellProductButton_Click;
             ShowProductOfCertainTypeButton.Click += ShowProductOfCertainTypeButton_Click;
@@ -43,8 +38,9 @@ namespace Warehouse
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.AllProductsDeletion();
-            /*DatabaseInformationWindow.InformationLabel.Content = "All products have been removed";
-            DatabaseInformationWindow.Show();*/
+            InformationWindow DatabaseInformationWindow = new InformationWindow();
+            DatabaseInformationWindow.InformationLabel.Content = "All products have been removed";
+            DatabaseInformationWindow.Show();
         }
         private void ShowSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +52,8 @@ namespace Warehouse
         }
         private void ShowProductOfCertainTypeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CertainTypeProducts ProductsOfCertainType = new CertainTypeProducts();
+            ProductsOfCertainType.Show();
         }
         private void SellProductButton_Click(object sender, RoutedEventArgs e)
         {
@@ -68,9 +65,5 @@ namespace Warehouse
             NewProductAddition NewProduct = new NewProductAddition(this);
             NewProduct.Show();
         }
-        //static void DatabaseMainGridDeletion()
-        //{
-        //    databaseMainGrid.Items.Clear();
-        //}
     }
 }
