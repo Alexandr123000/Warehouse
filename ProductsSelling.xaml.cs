@@ -14,9 +14,11 @@ namespace Warehouse
 {
     public partial class ProductsSelling : Window
     {
-        public ProductsSelling()
+        MainWindow TempObject;
+        public ProductsSelling(MainWindow TempObject)
         {
             InitializeComponent();
+            this.TempObject = TempObject;
             ProductSellingButton.Click += ProductSellingButton_Click;
             CancelProductSellingButton.Click += CancelProductSellingButton_Click;
         }
@@ -28,8 +30,8 @@ namespace Warehouse
 
         private void ProductSellingButton_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseWork TempObject = new DatabaseWork();
-            TempObject.ProductDeletion(this);
+            DatabaseWork TempDataObject = new DatabaseWork();
+            TempDataObject.ProductDeletion(this, TempObject);
         }
     }
 }

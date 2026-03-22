@@ -31,7 +31,7 @@ namespace Warehouse
             double TempTotalPrice = Convert.ToDouble(PriceOfNewProductTextBox.Text) * Convert.ToInt32(AmountOfNewProductTextBox.Text);
             MainWidowObject.databaseMainGrid.ItemsSource = null;
             DatabaseWork.Data.Clear();
-            MainWindow.MainDatabase.DataInsertion(NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
+            MainWindow.MainDatabase.DataInsertion(this, NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
             MainWindow.MainDatabase.AllDataExtraction();
             MainWidowObject.databaseMainGrid.ItemsSource = DatabaseWork.Data;
             this.Close();

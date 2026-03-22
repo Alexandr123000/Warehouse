@@ -17,9 +17,22 @@ namespace Warehouse
     /// </summary>
     public partial class SoldProducts : Window
     {
-        public SoldProducts()
+        MainWindow TempObject;
+        public SoldProducts(MainWindow TempObject)
         {
             InitializeComponent();
+            
+            this.TempObject = TempObject;
+            CloseSoldProductsButton.Click += CloseSoldProductsButton_Click;
+            DatabaseWork SoldProductsObject = new DatabaseWork();
+            SoldProductsObject.SetAllSoldProductsObject(this);
+            SoldProductsObject.SoldProductsDataExtraction();
+            SoldProductsGrid.ItemsSource = DatabaseWork.SoldProductsData;
+        }
+
+        private void CloseSoldProductsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -22,7 +22,8 @@ namespace Warehouse
         {
             InitializeComponent();
             NewProductAddition NewProduct = new NewProductAddition(this);
-            ProductsSelling SomeProductSelling = new ProductsSelling();
+            ProductsSelling SomeProductSelling = new ProductsSelling(this);
+            SoldProducts AllSoldProducts = new SoldProducts(this);
             this.DataContext = new MainWindowViewModel();
             MainDatabase.SetObject(this);
             MainDatabase.AllDataExtraction();
@@ -46,7 +47,11 @@ namespace Warehouse
         }
         private void ShowSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            SoldProducts AllSoldProducts = new SoldProducts(this);
+            MainDatabase.SoldProductsDataExtraction();
+            AllSoldProducts.SoldProductsGrid.ItemsSource = null;
+            AllSoldProducts.SoldProductsGrid.ItemsSource = DatabaseWork.SoldProductsData;
+            AllSoldProducts.Show();
         }
         private void ShowProductOfCertainTypeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +59,7 @@ namespace Warehouse
         }
         private void SellProductButton_Click(object sender, RoutedEventArgs e)
         {
-            ProductsSelling SomeProductSelling = new ProductsSelling();
+            ProductsSelling SomeProductSelling = new ProductsSelling(this);
             SomeProductSelling.Show();
         }
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
