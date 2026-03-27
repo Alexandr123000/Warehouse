@@ -16,7 +16,7 @@
         <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="1003,28,34,610"/>
         <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1146,30,9,608" Width="25"/>
 
-        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="979,53,34,585" Height="25"/>
+        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="979,43,34,595" Height="25"/>
         <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1146,55,9,583" Width="25"/>
 
         <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="0,0,1082,633"/>
