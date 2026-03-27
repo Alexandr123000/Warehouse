@@ -5,30 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Grid Height="663" Width="1180" Margin="10,10,10,10">
-        <Label Content="Product Types" FontSize="16" Margin="0,182,1064,443"/>
-        <Label Content="Products" FontSize="16" Margin="236,182,865,444"/>
+        Title="MainWindow" Height="653" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Width="1180" Margin="10,10,10,11">
+        <Label Content="Product Types" FontSize="16" Margin="0,55,1067,362"/>
+        <Label Content="Products" FontSize="16" Margin="236,55,867,362"/>
 
-        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="1053,3,34,635"/>
-        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Margin="1146,5,9,633" Width="25"/>
+        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="1054,9,33,569"/>
+        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Margin="1147,11,8,567" Width="25"/>
 
-        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="1003,28,34,610"/>
-        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1146,30,9,608" Width="25"/>
+        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="1004,34,33,544"/>
+        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Margin="1147,36,8,542" Width="25"/>
 
-        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="979,43,34,595" Height="25"/>
-        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1146,55,9,583" Width="25"/>
+        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="980,59,33,519" Height="25"/>
+        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Margin="1147,61,8,517" Width="25"/>
 
-        <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="0,0,1082,633"/>
-        <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="103,0,978,633"/>
+        <Button Name="AddProductButton" Content="Add Product" Height="30" Margin="1,4,1095,549"/>
+        <Button Name="SellProductButton" Content="Sell Product" Height="30" Margin="90,4,1012,549"/>
 
-        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="556,0,487,633"/>
-        <Button Name="ShowProductOfCertainTypeButton" Content="Show Product Of Certain Type" Height="30" Margin="207,0,777,633"/>
+        <Button Name="DeleteAllProductsButton" Content="Delete All Products" Height="30" Margin="472,4,596,549"/>
+        <Button Name="ShowProductOfCertainTypeButton" Content="Show Product Of Certain Type" Height="30" Margin="174,4,835,549"/>
 
-        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="408,0,629,633"/>
+        <Button Name="ShowSoldProductsButton" Content="Show Sold Products" Height="30" Margin="350,4,713,549"/>
+        <Button Name="SortProductsByNameButton" Content="Sort Products By Name" Height="30" Margin="589,4,459,549"/>
+        <Button Name="SortProductsByPriceButton" Content="Sort Products By Price" Height="30" Margin="726,4,327,549"/>
+        <Button Name="GroupProductsByTypeButton" Content="Group Products By Type" Height="30" Margin="858,4,182,549"/>
 
-        <DataGrid Name="databaseMainGrid" ColumnWidth="132" Margin="236,219,0,1"/>
-        <DataGrid Name="productTypesGrid" ColumnWidth="113" Margin="0,219,949,1"/>
+        <DataGrid Name="databaseMainGrid" ColumnWidth="132" Margin="236,87,0,-2"/>
+        <DataGrid Name="productTypesGrid" ColumnWidth="113" Margin="0,87,949,-2"/>
 
         <!--<TextBox Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="200" Height="50"/>
         <TextBlock Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200" Margin="311,282,311,104" Height="50"/>-->
