@@ -29,10 +29,8 @@
         <Button Name="SortProductsByNameButton" Content="Sort Products By Name" Height="30" Margin="589,4,459,549"/>
         <Button Name="SortProductsByPriceButton" Content="Sort Products By Price" Height="30" Margin="726,4,327,549"/>
         <Button Name="GroupProductsByTypeButton" Content="Group Products By Type" Height="30" Margin="858,4,182,549"/>
-
         <DataGrid Name="databaseMainGrid" ColumnWidth="132" Margin="236,87,0,-2"/>
         <DataGrid Name="productTypesGrid" ColumnWidth="113" Margin="0,87,949,-2"/>
-
         <!--<TextBox Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWayToSource}" Width="200" Height="50"/>
         <TextBlock Text="{Binding Path=text, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="200" Margin="311,282,311,104" Height="50"/>-->
     </Grid>
