@@ -33,8 +33,111 @@ namespace Warehouse
             command.ExecuteNonQuery();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS SoldWares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, Amount INTEGER, TotalPrice REAL, FOREIGN KEY (Type) REFERENCES WareTypes(Name));";
             command.ExecuteNonQuery();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS CurrentBalanceInformation (CurrentBalance REAL DEFAULT 10000);";
+            command.ExecuteNonQuery();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS AmountOfProductsInformation (AmountOfProducts INTEGER);";
+            command.ExecuteNonQuery();
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS AmountOfSoldProductsInformation (AmountOfSoldProducts INTEGER);";
+            command.ExecuteNonQuery();
             connection.Close();
         }
+
+
+        public void CurrentBalanceDataUpdating(double CurrentBalancel) //---
+        {
+
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection();
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            Command.CommandText = @$"UPDATE CurrentBalanceInformation SET CurrentBalance = '{CurrentBalancel}';";
+            Command.ExecuteNonQuery();
+            TempConnection.Close();
+
+        }
+
+        public void AmountOfProductsDataUpdating(int AmountOfProducts) //---
+        {
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection();
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            Command.CommandText = @$"UPDATE AmountOfProductsInformation SET AmountOfProducts = '{AmountOfProducts}';";
+            Command.ExecuteNonQuery();
+            TempConnection.Close();
+        }
+
+        public void AmountOfSoldProductsDataUpdating(int AmountOfSoldProducts) //---
+        {
+            //--------------
+            SQLiteConnection TempConnection = new SQLiteConnection();
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //--------------
+            TempConnection.Open();
+            Command.CommandText = @$"UPDATE AmountOfSoldProductsInformation SET AmountOfSoldProducts = '{AmountOfSoldProducts}';";
+            Command.ExecuteNonQuery();
+            TempConnection.Close();
+        }
+
+
+
+        public void CurrentBalanceDataExtraction() //---
+        {
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM CurrentBalanceInformation";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                MessageBox.Show(Reader.GetDouble(0).ToString());
+                MainWindow.CurrentBalance = Reader.GetDouble(0);
+            }
+            TempConnection.Close();
+        }
+
+        public void AmountOfProductsDataExtraction() //---
+        {
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM AmountOfProductsInformation";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                MainWindow.CurrentBalance = Convert.ToInt64(Reader.GetInt32(0));
+            }
+            TempConnection.Close();
+        }
+
+        public void AmountOfSoldProductsDataExtraction() //---
+        {
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM AmountOfSoldProductsInformation";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                MainWindow.CurrentBalance = Convert.ToInt64(Reader.GetInt32(0));
+            }
+            TempConnection.Close();
+        }
+
         public void SortProductsByName() //+++ =================================================================
         {
             Data.Clear();
@@ -129,6 +232,7 @@ namespace Warehouse
             }
             else
             {
+                MainWindow.CurrentBalance += Amount * Price;
                 TypeData.Clear();
                 TypeDataInsertion(Type);
                 //--------------

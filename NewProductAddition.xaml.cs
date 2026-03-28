@@ -34,6 +34,7 @@ namespace Warehouse
             MainWindow.MainDatabase.DataInsertion(this, NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
             MainWindow.MainDatabase.AllDataExtraction();
             MainWidowObject.databaseMainGrid.ItemsSource = DatabaseWork.Data;
+            MainWidowObject.CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
             this.Close();
         }
     }

@@ -17,9 +17,18 @@ namespace Warehouse
     public partial class MainWindow : Window
     {
         public static DatabaseWork MainDatabase = new DatabaseWork();
+        public static double CurrentBalance { get; set; }
+        public static int TotalNumberOfProducts { get; set; }
+        public static int TotalNumberOfSoldProducts { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+
+            MainDatabase.CurrentBalanceDataUpdating(10000);
+
+            MainDatabase.CurrentBalanceDataExtraction();
+            CurrentBalanceLabel.Content = CurrentBalance;
+   
             NewProductAddition NewProduct = new NewProductAddition(this);
             ProductsSelling SomeProductSelling = new ProductsSelling(this);
             SoldProducts AllSoldProducts = new SoldProducts(this);
@@ -37,30 +46,25 @@ namespace Warehouse
             SortProductsByNameButton.Click += SortProductsByNameButton_Click;
             SortProductsByPriceButton.Click += SortProductsByPriceButton_Click;
             GroupProductsByTypeButton.Click += GroupProductsByTypeButton_Click;
-
         }
-
         private void GroupProductsByTypeButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.GroupProductsByType();
             databaseMainGrid.ItemsSource = null;
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
-
         private void SortProductsByPriceButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.SortProductsByPrice();
             databaseMainGrid.ItemsSource = null;
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
-
         private void SortProductsByNameButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.SortProductsByName();
             databaseMainGrid.ItemsSource = null;
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
-
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.AllProductsDeletion();
