@@ -23,7 +23,7 @@ namespace Warehouse
         public static string databaseFile = @"Data Source=" + changedDirectory + "Database.db";
         SQLiteConnection connection = new SQLiteConnection(databaseFile);
         SQLiteCommand command = new SQLiteCommand();
-        public DatabaseWork()
+        public DatabaseWork() //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
         {
             connection.Open();
             command.Connection = connection;
@@ -35,6 +35,60 @@ namespace Warehouse
             command.ExecuteNonQuery();
             connection.Close();
         }
+        public void SortProductsByName() //+++ =================================================================
+        {
+            Data.Clear();
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM Wares ORDER BY Name";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                Data.Add(new MainTable(Convert.ToInt32(Reader.GetInt64(0)), Reader.GetString(1), Reader.GetString(2), Reader.GetDouble(3), Reader.GetDouble(4), Convert.ToInt32(Reader.GetInt64(5)), Reader.GetDouble(6)));
+            }
+            TempConnection.Close();
+        }
+
+        public void SortProductsByPrice() //+++ =================================================================
+        {
+            Data.Clear();
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM Wares ORDER BY Price DESC";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                Data.Add(new MainTable(Convert.ToInt32(Reader.GetInt64(0)), Reader.GetString(1), Reader.GetString(2), Reader.GetDouble(3), Reader.GetDouble(4), Convert.ToInt32(Reader.GetInt64(5)), Reader.GetDouble(6)));
+            }
+            TempConnection.Close();
+        }
+
+        public void GroupProductsByType() //+++ =================================================================
+        {
+            Data.Clear();
+            //-----------
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            //-----------
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM Wares ORDER BY Type";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                Data.Add(new MainTable(Convert.ToInt32(Reader.GetInt64(0)), Reader.GetString(1), Reader.GetString(2), Reader.GetDouble(3), Reader.GetDouble(4), Convert.ToInt32(Reader.GetInt64(5)), Reader.GetDouble(6)));
+            }
+            TempConnection.Close();
+        }
+
         public void SetObject(MainWindow changeGrid) //+++ =================================================================
         {
             ChangeGrid = changeGrid;

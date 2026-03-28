@@ -34,7 +34,33 @@ namespace Warehouse
             ShowProductOfCertainTypeButton.Click += ShowProductOfCertainTypeButton_Click;
             ShowSoldProductsButton.Click += ShowSoldProductsButton_Click;
             DeleteAllProductsButton.Click += DeleteAllProductsButton_Click;
+            SortProductsByNameButton.Click += SortProductsByNameButton_Click;
+            SortProductsByPriceButton.Click += SortProductsByPriceButton_Click;
+            GroupProductsByTypeButton.Click += GroupProductsByTypeButton_Click;
+
         }
+
+        private void GroupProductsByTypeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainDatabase.GroupProductsByType();
+            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = DatabaseWork.Data;
+        }
+
+        private void SortProductsByPriceButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainDatabase.SortProductsByPrice();
+            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = DatabaseWork.Data;
+        }
+
+        private void SortProductsByNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainDatabase.SortProductsByName();
+            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = DatabaseWork.Data;
+        }
+
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.AllProductsDeletion();
