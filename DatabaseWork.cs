@@ -19,14 +19,13 @@ namespace Warehouse
         static internal List<MainTable> CertainTypeProductsData = new List<MainTable>();
         MainWindow ChangeGrid;
         static SoldProducts AllSoldProducts;
-        public static bool mark = false;
         CertainTypeProducts CertainTypeProductsObject;
         public static string currentDirectory = Directory.GetCurrentDirectory();
         public static string changedDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, @"../../../"));
         public static string databaseFile = @"Data Source=" + changedDirectory + "Database.db";
         SQLiteConnection connection = new SQLiteConnection(databaseFile);
         SQLiteCommand command = new SQLiteCommand();
-        public DatabaseWork() //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        public DatabaseWork()
         {
             connection.Open();
             command.Connection = connection;
@@ -40,75 +39,53 @@ namespace Warehouse
             command.ExecuteNonQuery();
             connection.Close();
         }
-
-
-        public void CurrentBalanceDataUpdating(double CurrentBalance) //+++ =================================================================
+        public void CurrentBalanceDataUpdating(double CurrentBalance)
         {
-                MessageBox.Show(CurrentBalance.ToString());
-                //-----------
-                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                SQLiteCommand Command = new SQLiteCommand();
-                Command.Connection = TempConnection;
-                //-----------
-                TempConnection.Open();
-                Command.CommandText = @$"UPDATE CurrentBalanceInformation SET CurrentBalance = '{CurrentBalance}' WHERE id = 2;";
-                Command.ExecuteNonQuery();
-                MainWindow.CurrentBalance = CurrentBalance;
-                TempConnection.Close();
-        }
-
-
-        public void CurrentBalanceDataInsertion() //+++ =================================================================
-        {
-                //-----------
-                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                SQLiteCommand Command = new SQLiteCommand();
-                Command.Connection = TempConnection;
-                //-----------
-                TempConnection.Open();
-                Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
-                Command.ExecuteNonQuery();
-                Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
-                Command.ExecuteNonQuery();
-                TempConnection.Close();
-        }
-
-
-        public bool CurrentBalanceInformationExisting() //+++ =================================================================
-        {
-                //-----------
-                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-                SQLiteCommand Command = new SQLiteCommand();
-                Command.Connection = TempConnection;
-                //-----------
-                TempConnection.Open();
-                Command.CommandText = @"SELECT * FROM CurrentBalanceInformation";
-                var Reader = Command.ExecuteReader();
-                while (Reader.Read())
-                {
-                    if (Reader.GetValue(1).ToString() == "30000")
-                    {
-                        TempConnection.Close();
-                        return true;
-                    }
-                }
-                TempConnection.Close();
-                return false;
-        }
-
-
-
-
-
-
-
-        public void CurrentBalanceDataExtraction() //+++ =================================================================
-        {
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
+            TempConnection.Open();
+            Command.CommandText = @$"UPDATE CurrentBalanceInformation SET CurrentBalance = '{CurrentBalance}' WHERE id = 2;";
+            Command.ExecuteNonQuery();
+            MainWindow.CurrentBalance = CurrentBalance;
+            TempConnection.Close();
+        }
+        public void CurrentBalanceDataInsertion()
+        {
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            TempConnection.Open();
+            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+            Command.ExecuteNonQuery();
+            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+            Command.ExecuteNonQuery();
+            TempConnection.Close();
+        }
+        public bool CurrentBalanceInformationExisting()
+        {
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
+            TempConnection.Open();
+            Command.CommandText = @"SELECT * FROM CurrentBalanceInformation";
+            var Reader = Command.ExecuteReader();
+            while (Reader.Read())
+            {
+                if (Reader.GetValue(1).ToString() == "30000")
+                {
+                    TempConnection.Close();
+                    return true;
+                }
+            }
+            TempConnection.Close();
+            return false;
+        }
+        public void CurrentBalanceDataExtraction()
+        {
+            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+            SQLiteCommand Command = new SQLiteCommand();
+            Command.Connection = TempConnection;
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM CurrentBalanceInformation";
             var Reader = Command.ExecuteReader();
@@ -118,19 +95,12 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-
-
-
-
-
-        public void SortProductsByName() //+++ =================================================================
+        public void SortProductsByName()
         {
             Data.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM Wares ORDER BY Name";
             var Reader = Command.ExecuteReader();
@@ -140,15 +110,12 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-
-        public void SortProductsByPrice() //+++ =================================================================
+        public void SortProductsByPrice()
         {
             Data.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM Wares ORDER BY Price DESC";
             var Reader = Command.ExecuteReader();
@@ -158,15 +125,12 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-
-        public void GroupProductsByType() //+++ =================================================================
+        public void GroupProductsByType()
         {
             Data.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM Wares ORDER BY Type";
             var Reader = Command.ExecuteReader();
@@ -176,26 +140,23 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-
-        public void SetObject(MainWindow changeGrid) //+++ =================================================================
+        public void SetObject(MainWindow changeGrid)
         {
             ChangeGrid = changeGrid;
         }
-        public void SetAllSoldProductsObject(SoldProducts SoldProducts) //+++ =================================================================
+        public void SetAllSoldProductsObject(SoldProducts SoldProducts)
         {
             AllSoldProducts = SoldProducts;
         }
-        public void SetCertaingTypeProductsObject(CertainTypeProducts CertainTypeProductsObject) //+++ =================================================================
+        public void SetCertaingTypeProductsObject(CertainTypeProducts CertainTypeProductsObject)
         {
             this.CertainTypeProductsObject = CertainTypeProductsObject;
         }
-        public void TypeDataInsertion(string Name = "") //+++ =================================================================
+        public void TypeDataInsertion(string Name = "")
         {
-            //--------------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //--------------
             TempConnection.Open();
             Command.CommandText = $"INSERT INTO WareTypes (Name) VALUES ('{Name}');";
             Command.ExecuteNonQuery();
@@ -207,7 +168,7 @@ namespace Warehouse
             DatabaseInformationWindow.InformationLabel.Content = "Product added";
             DatabaseInformationWindow.Show();
         }
-        public void DataInsertion(NewProductAddition TempObject, string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0) // =================================================================
+        public void DataInsertion(NewProductAddition TempObject, string Name = "", string Type = "", double Price = 0, double PurchasePrice = 0, int Amount = 0, double TotalPrice = 0)
         {
 
             if (Amount == 0 || Amount < 0)
@@ -221,11 +182,9 @@ namespace Warehouse
                 MainWindow.CurrentBalance += Amount * Price;
                 TypeData.Clear();
                 TypeDataInsertion(Type);
-                //--------------
                 SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
                 SQLiteCommand Command = new SQLiteCommand();
                 Command.Connection = TempConnection;
-                //--------------
                 TempConnection.Open();
                 Command.CommandText = $"INSERT INTO Wares (Name, Type, Price, PurchasePrice, Amount, TotalPrice) VALUES ('{Name}', '{Type}', '{Price}', '{PurchasePrice}', '{Amount}', '{TotalPrice}');";
                 Command.ExecuteNonQuery();
@@ -238,14 +197,12 @@ namespace Warehouse
                 ChangeGrid.CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
             }
         }
-        public void CertainTypeProductsDataExtraction() //+++ =================================================================
+        public void CertainTypeProductsDataExtraction()
         {
             CertainTypeProductsData.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @$"SELECT * FROM Wares WHERE Type = '{CertainTypeProductsObject.ProductTypeTextBox.Text}';";
             var CertainTypeProductsReader = Command.ExecuteReader();
@@ -255,14 +212,12 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-        public void AllDataExtraction() //+++ =================================================================
+        public void AllDataExtraction()
         {
             Data.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM Wares";
             var Reader = Command.ExecuteReader();
@@ -272,14 +227,12 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-        public void SoldProductsDataExtraction() //+++ =================================================================
+        public void SoldProductsDataExtraction()
         {
             SoldProductsData.Clear();
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM SoldWares";
             var SoldProductsReader = Command.ExecuteReader();
@@ -289,13 +242,11 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-        public void AllTypeDataExtraction() //+++ =================================================================
+        public void AllTypeDataExtraction()
         {
-            //-----------
             SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
-            //-----------
             TempConnection.Open();
             Command.CommandText = @"SELECT * FROM WareTypes";
             var TypeReader = Command.ExecuteReader();
@@ -305,7 +256,7 @@ namespace Warehouse
             }
             TempConnection.Close();
         }
-        public void AllProductsDeletion() //+++
+        public void AllProductsDeletion()
         {
             connection.Open();
             command.CommandText = @"DELETE FROM Wares";
@@ -320,34 +271,8 @@ namespace Warehouse
             ChangeGrid.productTypesGrid.ItemsSource = TypeData;
             connection.Close();
         }
-
-
-        public bool ProductExisting(string WareName, string WareType)
+        public void ProductDeletion(ProductsSelling productsSelling, MainWindow TempObject)
         {
-            //-----------
-            SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
-            SQLiteCommand Command = new SQLiteCommand();
-            Command.Connection = TempConnection;
-            //-----------
-            TempConnection.Open();
-            Command.CommandText = @$"SELECT Name, Type FROM Wares WHERE Name = '{WareName}' AND Type = '{WareType}'";
-            var Reader = Command.ExecuteReader();
-            while (Reader.Read())
-            {
-                if (Reader.GetString(0) == WareName && Reader.GetString(1) == WareType)
-                {
-                    TempConnection.Close();
-                    return true;
-                }
-            }
-            TempConnection.Close();
-            return false;
-        }
-
-        public void ProductDeletion(ProductsSelling productsSelling, MainWindow TempObject) //+++ =================================================================
-        {
-            bool mark = ProductExisting(productsSelling.NameOfSellingProductTextBox.Text, productsSelling.TypeOfSellingProductTextBox.Text);
-            InformationWindow DatabaseInformationWindow = new InformationWindow();
             double TotalPrice;
 
             if (Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) == 0 || Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text) < 0)
@@ -356,22 +281,12 @@ namespace Warehouse
                 DatabaseProductInformationWindow.InformationLabel.Content = "The number is incorrect";
                 DatabaseProductInformationWindow.Show();
             }
-            else if (!mark)
-            {
-                DatabaseInformationWindow.InformationLabel.Content = "No such data";
-                DatabaseInformationWindow.Show();
-                return;
-            }
             else
             {
-
-
-                //--------------
                 SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
                 SQLiteCommand Command = new SQLiteCommand();
                 TotalPrice = Convert.ToDouble(productsSelling.PriceSellingProductTextBox.Text) * Convert.ToInt32(productsSelling.ProductQuantityTextBox.Text);
                 Command.Connection = TempConnection;
-                //--------------
                 TempConnection.Open();
                 Command.CommandText = @$"UPDATE Wares SET Amount = (SELECT Amount FROM Wares WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}') - {productsSelling.ProductQuantityTextBox.Text} WHERE Name = '{productsSelling.NameOfSellingProductTextBox.Text}' AND Type = '{productsSelling.TypeOfSellingProductTextBox.Text}';";
                 Command.ExecuteNonQuery();

@@ -7,12 +7,8 @@
         mc:Ignorable="d"
         Title="NewProductAddition" Height="470" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-
         <Label Content="Current Balance:" FontSize="12" Margin="336,10,28,369"/>
         <Label Name="CurrentBalanceLabel" Content="---" FontSize="12" Margin="425,10,12,381"/>
-
-
-
         <Label Content="Product Name" Margin="4,4,292,403"/>
         <TextBox Name="NameOfNewProductTextBox" Margin="4,31,292,382"/>
         <Label Content="Product Type" Margin="4,57,292,350"/>

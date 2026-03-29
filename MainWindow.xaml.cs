@@ -23,9 +23,6 @@ namespace Warehouse
         public MainWindow()
         {
             InitializeComponent();
-
-
-   
             NewProductAddition NewProduct = new NewProductAddition(this);
             ProductsSelling SomeProductSelling = new ProductsSelling(this);
             SoldProducts AllSoldProducts = new SoldProducts(this);
@@ -40,9 +37,6 @@ namespace Warehouse
             }
             MainDatabase.CurrentBalanceDataExtraction();
             CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
-
-
-
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
             productTypesGrid.ItemsSource = DatabaseWork.TypeData;
             AddProductButton.Click += AddProductButton_Click;
