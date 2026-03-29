@@ -8,14 +8,8 @@
         Title="NewProductAddition" Height="470" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
 
-        <Label Content="Current Balance:" Height="25" FontSize="11" Margin="274,6,100,403"/>
-        <Label Name="CurrentBalanceLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,4,2,405"/>
-
-        <Label Content="Total Number Of Products:" Height="25" FontSize="11" Margin="274,31,50,378"/>
-        <Label Name="TotalNumberOfProductsLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,31,2,378"/>
-
-        <Label Content="Total Number Of Sold Products:" FontSize="11" Height="25" Margin="274,56,28,353"/>
-        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" Height="25" FontSize="11" Width="25" Margin="453,57,2,352"/>
+        <Label Content="Current Balance:" FontSize="12" Margin="336,10,28,369"/>
+        <Label Name="CurrentBalanceLabel" Content="---" FontSize="12" Margin="425,10,12,381"/>
 
 
 

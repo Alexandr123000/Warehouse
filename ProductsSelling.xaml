@@ -8,14 +8,8 @@
         Title="ProductsSelling" Height="370" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Height="330" Width="480" Margin="0,0,0,0">
 
-        <Label Content="Current Balance:" FontSize="11" Margin="290,3,84,299"/>
-        <Label Name="CurrentBalanceLabel" Content="---" FontSize="11" Width="25" Margin="454,2,1,300"/>
-
-        <Label Content="Total Number Of Products:" FontSize="11" Margin="290,31,34,271"/>
-        <Label Name="TotalNumberOfProductsLabel" Content="---" FontSize="11" Width="25" Margin="454,32,1,270"/>
-
-        <Label Content="Total Number Of Sold Products:" FontSize="11" Margin="290,59,12,242"/>
-        <Label Name="TotalNumberOfSoldProductsLabel" Content="---" FontSize="11" Width="25" Margin="454,61,1,241" RenderTransformOrigin="0.533,0.548"/>
+        <Label Content="Current Balance:" FontSize="12" Margin="334,3,-6,234"/>
+        <Label Name="CurrentBalanceLabel" Content="---" FontSize="12" Margin="423,3,-31,250"/>
 
 
 

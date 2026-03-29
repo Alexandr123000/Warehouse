@@ -95,11 +95,15 @@ namespace Warehouse
         private void SellProductButton_Click(object sender, RoutedEventArgs e)
         {
             ProductsSelling SomeProductSelling = new ProductsSelling(this);
+            MainDatabase.CurrentBalanceDataExtraction();
+            SomeProductSelling.CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
             SomeProductSelling.Show();
         }
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             NewProductAddition NewProduct = new NewProductAddition(this);
+            MainDatabase.CurrentBalanceDataExtraction();
+            NewProduct.CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
             NewProduct.Show();
         }
     }
