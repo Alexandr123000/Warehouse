@@ -24,10 +24,7 @@ namespace Warehouse
         {
             InitializeComponent();
 
-            MainDatabase.CurrentBalanceDataUpdating(10000);
 
-            MainDatabase.CurrentBalanceDataExtraction();
-            CurrentBalanceLabel.Content = CurrentBalance;
    
             NewProductAddition NewProduct = new NewProductAddition(this);
             ProductsSelling SomeProductSelling = new ProductsSelling(this);
@@ -36,6 +33,16 @@ namespace Warehouse
             MainDatabase.SetObject(this);
             MainDatabase.AllDataExtraction();
             MainDatabase.AllTypeDataExtraction();
+            if (!MainDatabase.CurrentBalanceInformationExisting())
+            {
+                MainDatabase.CurrentBalanceDataInsertion();
+                MainDatabase.CurrentBalanceDataUpdating(50000);
+            }
+            MainDatabase.CurrentBalanceDataExtraction();
+            CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
+
+
+
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
             productTypesGrid.ItemsSource = DatabaseWork.TypeData;
             AddProductButton.Click += AddProductButton_Click;

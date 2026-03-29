@@ -17,6 +17,7 @@ namespace Warehouse
         static internal List<MainTable> CertainTypeProductsData = new List<MainTable>();
         MainWindow ChangeGrid;
         static SoldProducts AllSoldProducts;
+        public static bool mark = false;
         CertainTypeProducts CertainTypeProductsObject;
         public static string currentDirectory = Directory.GetCurrentDirectory();
         public static string changedDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, @"../../../"));
@@ -33,7 +34,7 @@ namespace Warehouse
             command.ExecuteNonQuery();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS SoldWares (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Type TEXT, Price REAL, Amount INTEGER, TotalPrice REAL, FOREIGN KEY (Type) REFERENCES WareTypes(Name));";
             command.ExecuteNonQuery();
-            command.CommandText = @"CREATE TABLE IF NOT EXISTS CurrentBalanceInformation (CurrentBalance REAL DEFAULT 10000);";
+            command.CommandText = @"CREATE TABLE IF NOT EXISTS CurrentBalanceInformation (id INTEGER PRIMARY KEY AUTOINCREMENT, CurrentBalance REAL DEFAULT 10000);";
             command.ExecuteNonQuery();
             command.CommandText = @"CREATE TABLE IF NOT EXISTS AmountOfProductsInformation (AmountOfProducts INTEGER);";
             command.ExecuteNonQuery();
@@ -43,19 +44,58 @@ namespace Warehouse
         }
 
 
-        public void CurrentBalanceDataUpdating(double CurrentBalancel) //---
+        public void CurrentBalanceDataUpdating(double CurrentBalance) //---
         {
+                MessageBox.Show(CurrentBalance.ToString());
+                //-----------
+                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+                SQLiteCommand Command = new SQLiteCommand();
+                Command.Connection = TempConnection;
+                //-----------
+                TempConnection.Open();
+                Command.CommandText = @$"UPDATE CurrentBalanceInformation SET CurrentBalance = '{CurrentBalance}' WHERE id = 2;";
+                Command.ExecuteNonQuery();
+                MainWindow.CurrentBalance = CurrentBalance;
+                TempConnection.Close();
+        }
 
-            //--------------
-            SQLiteConnection TempConnection = new SQLiteConnection();
-            SQLiteCommand Command = new SQLiteCommand();
-            Command.Connection = TempConnection;
-            //--------------
-            TempConnection.Open();
-            Command.CommandText = @$"UPDATE CurrentBalanceInformation SET CurrentBalance = '{CurrentBalancel}';";
-            Command.ExecuteNonQuery();
-            TempConnection.Close();
 
+        public void CurrentBalanceDataInsertion() //---
+        {
+                //-----------
+                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+                SQLiteCommand Command = new SQLiteCommand();
+                Command.Connection = TempConnection;
+                //-----------
+                TempConnection.Open();
+                Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+                Command.ExecuteNonQuery();
+                Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+                Command.ExecuteNonQuery();
+                TempConnection.Close();
+        }
+
+
+        public bool CurrentBalanceInformationExisting()
+        {
+                //-----------
+                SQLiteConnection TempConnection = new SQLiteConnection(databaseFile);
+                SQLiteCommand Command = new SQLiteCommand();
+                Command.Connection = TempConnection;
+                //-----------
+                TempConnection.Open();
+                Command.CommandText = @"SELECT * FROM CurrentBalanceInformation";
+                var Reader = Command.ExecuteReader();
+                while (Reader.Read())
+                {
+                    if (Reader.GetValue(1).ToString() == "30000")
+                    {
+                        TempConnection.Close();
+                        return true;
+                    }
+                }
+                TempConnection.Close();
+                return false;
         }
 
         public void AmountOfProductsDataUpdating(int AmountOfProducts) //---
@@ -98,8 +138,7 @@ namespace Warehouse
             var Reader = Command.ExecuteReader();
             while (Reader.Read())
             {
-                MessageBox.Show(Reader.GetDouble(0).ToString());
-                MainWindow.CurrentBalance = Reader.GetDouble(0);
+                MainWindow.CurrentBalance = Reader.GetDouble(1);
             }
             TempConnection.Close();
         }
