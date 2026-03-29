@@ -23,6 +23,7 @@ namespace Warehouse
         public static string currentDirectory = Directory.GetCurrentDirectory();
         public static string changedDirectory = System.IO.Path.GetFullPath(System.IO.Path.Combine(currentDirectory, @"../../../"));
         public static string databaseFile = @"Data Source=" + changedDirectory + "Database.db";
+        public static string File = changedDirectory + "WarehouseImage.bmp";
         SQLiteConnection connection = new SQLiteConnection(databaseFile);
         SQLiteCommand command = new SQLiteCommand();
         public DatabaseWork()

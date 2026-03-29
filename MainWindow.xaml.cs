@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Data.SQLite;
 using System.IO;
 using Base.ViewModels;
+using System.Drawing;
 
 namespace Warehouse
 {

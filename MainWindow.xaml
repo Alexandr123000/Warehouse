@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Warehouse"
         mc:Ignorable="d"
         Title="Warehouse" Height="653" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
     <Grid Width="1180" Margin="10,10,10,11">
         <Label Content="Product Types" FontSize="16" Margin="0,55,1067,362"/>
         <Label Content="Products" FontSize="16" Margin="236,55,867,362"/>
