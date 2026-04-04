@@ -21,6 +21,7 @@ namespace Warehouse
             this.TempObject = TempObject;
             ProductSellingButton.Click += ProductSellingButton_Click;
             CancelProductSellingButton.Click += CancelProductSellingButton_Click;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void CancelProductSellingButton_Click(object sender, RoutedEventArgs e)
         {

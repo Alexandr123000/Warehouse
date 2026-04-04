@@ -34,7 +34,7 @@ namespace Warehouse
             if (!MainDatabase.CurrentBalanceInformationExisting())
             {
                 MainDatabase.CurrentBalanceDataInsertion();
-                MainDatabase.CurrentBalanceDataUpdating(50000);
+                MainDatabase.CurrentBalanceDataUpdating(50000); //Setting the balance of the warehouse
             }
             MainDatabase.CurrentBalanceDataExtraction();
             CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
@@ -48,23 +48,24 @@ namespace Warehouse
             SortProductsByNameButton.Click += SortProductsByNameButton_Click;
             SortProductsByPriceButton.Click += SortProductsByPriceButton_Click;
             GroupProductsByTypeButton.Click += GroupProductsByTypeButton_Click;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void GroupProductsByTypeButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.GroupProductsByType();
-            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
         private void SortProductsByPriceButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.SortProductsByPrice();
-            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
         private void SortProductsByNameButton_Click(object sender, RoutedEventArgs e)
         {
             MainDatabase.SortProductsByName();
-            databaseMainGrid.ItemsSource = null;
+            databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
             databaseMainGrid.ItemsSource = DatabaseWork.Data;
         }
         private void DeleteAllProductsButton_Click(object sender, RoutedEventArgs e)
@@ -78,7 +79,7 @@ namespace Warehouse
         {
             SoldProducts AllSoldProducts = new SoldProducts(this);
             MainDatabase.SoldProductsDataExtraction();
-            AllSoldProducts.SoldProductsGrid.ItemsSource = null;
+            AllSoldProducts.SoldProductsGrid.ItemsSource = null; //cleaning the information of the widget
             AllSoldProducts.SoldProductsGrid.ItemsSource = DatabaseWork.SoldProductsData;
             AllSoldProducts.Show();
         }

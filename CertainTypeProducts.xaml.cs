@@ -20,12 +20,13 @@ namespace Warehouse
             MainWindow.MainDatabase.SetCertaingTypeProductsObject(this);
             ShowCertainTypeProductsButton.Click += ShowCertainTypeProductsButton_Click;
             CloseCertainTypeProductsButton.Click += CloseCertainTypeProductsButton_Click;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void ShowCertainTypeProductsButton_Click(object sender, RoutedEventArgs e)
         {
             DatabaseWork.CertainTypeProductsData.Clear();
             MainWindow.MainDatabase.CertainTypeProductsDataExtraction();
-            CertainTypeProductsGrid.ItemsSource = null;
+            CertainTypeProductsGrid.ItemsSource = null; //cleaning the information of the widget
             CertainTypeProductsGrid.ItemsSource = DatabaseWork.CertainTypeProductsData;
         }
         private void CloseCertainTypeProductsButton_Click(object sender, RoutedEventArgs e)

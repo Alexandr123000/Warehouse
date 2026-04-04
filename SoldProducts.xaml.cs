@@ -18,13 +18,13 @@ namespace Warehouse
         public SoldProducts(MainWindow TempObject)
         {
             InitializeComponent();
-            
             this.TempObject = TempObject;
             CloseSoldProductsButton.Click += CloseSoldProductsButton_Click;
             DatabaseWork SoldProductsObject = new DatabaseWork();
             SoldProductsObject.SetAllSoldProductsObject(this);
             SoldProductsObject.SoldProductsDataExtraction();
             SoldProductsGrid.ItemsSource = DatabaseWork.SoldProductsData;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void CloseSoldProductsButton_Click(object sender, RoutedEventArgs e)
         {

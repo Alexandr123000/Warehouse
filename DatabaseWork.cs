@@ -57,9 +57,9 @@ namespace Warehouse
             SQLiteCommand Command = new SQLiteCommand();
             Command.Connection = TempConnection;
             TempConnection.Open();
-            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');"; //setting the balance of the warehouse
             Command.ExecuteNonQuery();
-            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');";
+            Command.CommandText = $"INSERT INTO CurrentBalanceInformation (CurrentBalance) VALUES ('30000');"; //setting the balance of the warehouse
             Command.ExecuteNonQuery();
             TempConnection.Close();
         }
@@ -162,7 +162,7 @@ namespace Warehouse
             Command.CommandText = $"INSERT INTO WareTypes (Name) VALUES ('{Name}');";
             Command.ExecuteNonQuery();
             AllTypeDataExtraction();
-            ChangeGrid.productTypesGrid.ItemsSource = null;
+            ChangeGrid.productTypesGrid.ItemsSource = null; //cleaning the information of the widget
             ChangeGrid.productTypesGrid.ItemsSource = TypeData;
             TempConnection.Close();
             InformationWindow DatabaseInformationWindow = new InformationWindow();
@@ -266,8 +266,8 @@ namespace Warehouse
             command.ExecuteNonQuery();
             Data.Clear();
             TypeData.Clear();
-            ChangeGrid.databaseMainGrid.ItemsSource = null;
-            ChangeGrid.productTypesGrid.ItemsSource = null;
+            ChangeGrid.databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
+            ChangeGrid.productTypesGrid.ItemsSource = null; //cleaning the information of the widget
             ChangeGrid.databaseMainGrid.ItemsSource = Data;
             ChangeGrid.productTypesGrid.ItemsSource = TypeData;
             connection.Close();
@@ -302,8 +302,8 @@ namespace Warehouse
                 TempObject.CurrentBalanceLabel.Content = MainWindow.CurrentBalance;
                 AllDataExtraction();
                 SoldProductsDataExtraction();
-                TempObject.databaseMainGrid.ItemsSource = null;
-                AllSoldProducts.SoldProductsGrid.ItemsSource = null;
+                TempObject.databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
+                AllSoldProducts.SoldProductsGrid.ItemsSource = null; //cleaning the information of the widget
                 TempObject.databaseMainGrid.ItemsSource = Data;
                 AllSoldProducts.SoldProductsGrid.ItemsSource = SoldProductsData;
                 InformationWindow DatabaseProductSoldInformationWindow = new InformationWindow();

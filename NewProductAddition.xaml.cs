@@ -21,6 +21,7 @@ namespace Warehouse
             this.MainWidowObject = MainWidowObject;
             NewProductAdditionButton.Click += NewProductAdditionButton_Click;
             CancelNewProductAdditionButton.Click += CancelNewProductAdditionButton_Click;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void CancelNewProductAdditionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -29,7 +30,7 @@ namespace Warehouse
         private void NewProductAdditionButton_Click(object sender, RoutedEventArgs e)
         {
             double TempTotalPrice = Convert.ToDouble(PriceOfNewProductTextBox.Text) * Convert.ToInt32(AmountOfNewProductTextBox.Text);
-            MainWidowObject.databaseMainGrid.ItemsSource = null;
+            MainWidowObject.databaseMainGrid.ItemsSource = null; //cleaning the information of the widget
             DatabaseWork.Data.Clear();
             MainWindow.MainDatabase.DataInsertion(this, NameOfNewProductTextBox.Text, TypeOfNewProductTextBox.Text, Convert.ToDouble(PriceOfNewProductTextBox.Text), Convert.ToDouble(PurchasePriceOfNewProductTextBox.Text), Convert.ToInt32(AmountOfNewProductTextBox.Text), TempTotalPrice);
             MainWindow.MainDatabase.AllDataExtraction();

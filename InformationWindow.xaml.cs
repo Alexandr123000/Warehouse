@@ -18,6 +18,7 @@ namespace Warehouse
         {
             InitializeComponent();
             CloseInformationWindowButton.Click += CloseInformationWindowButton_Click;
+            this.Icon = new BitmapImage(new Uri(DatabaseWork.File, UriKind.RelativeOrAbsolute));
         }
         private void CloseInformationWindowButton_Click(object sender, RoutedEventArgs e)
         {
